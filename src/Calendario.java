@@ -6,13 +6,13 @@ public class Calendario {
     
 	private List<Object> horarios = new ArrayList<Object>();
 	
-	public void agregarHorario(Object horario) {
-		horarios.add(horario);
+	public void agregarReserva(Object reserva) {
+		horarios.add(reserva);
 		
 	}
 
-	public boolean contains(Object horario) {
-		return horarios.contains(horario);
+	public boolean contains(Object reserva) {
+		return horarios.contains(reserva);
 	}
 
 }
