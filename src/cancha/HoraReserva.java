@@ -1,8 +1,9 @@
+package cancha;
 
 public class HoraReserva {
 
-	public int hora;
-	public int minuto;
+	private int hora;
+	private int minuto;
 	
 	//Principio de encapsulamiento
 	public HoraReserva(int _hora, int _minuto)
