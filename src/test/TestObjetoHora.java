@@ -7,58 +7,48 @@ import org.junit.Test;
 import cancha.HoraReserva;
 
 public class TestObjetoHora {
-
-	//HORAS DE RESERVA
+	
+	private HoraReserva _horaReserva;
+	
 	@Test
 	public void testHoradeReservaDeveSerMayor5()
-	{
-		
-		try {
-			HoraReserva horaReserva = new HoraReserva(5,0);
-			fail();
-		} catch (Exception e) {
-			assertEquals("No se aceptan horas de reservas menores a 6:00",e.getMessage());
-		}
-		
+	{		
+		correrExcepcion(5,0,"No se aceptan horas de reservas menores a 6:00");
 	}
-	
 	
 	@Test
 	public void testHoradeReservaDeveSerMenorA24()
 	{
-		
-		try {
-			HoraReserva horaReserva = new HoraReserva(24,0);
-			fail();
-		} catch (Exception e) {
-			assertEquals("No se aceptan horas de reservas mayores a 23:00",e.getMessage());
-		}
-		
-	}
-	@Test
-	public void testHoraReservaDebeSerAsignada()
-	{
-		HoraReserva horaReserva = new HoraReserva(7,0);
-		assertEquals(7,horaReserva.obtenerHora());
+		correrExcepcion(24,0,"No se aceptan horas de reservas mayores a 23:00");
 	}
 	
-	//Minutos de reserva
 	@Test
 	public void testMinutosDeReservaDebenSer0()
 	{
-		try {
-			HoraReserva horaReserva = new HoraReserva(7,3);
-			fail();
-		} catch (Exception e) {
-			assertEquals("Minuto de reserva debe ser 0 o 30",e.getMessage());
-		}
+		correrExcepcion(7,3,"Minuto de reserva debe ser 0 o 30");
 	}
-
+	
+	@Test
+	public void testHoraReservaDebeSerAsignada()
+	{
+		_horaReserva = new HoraReserva(7,0);
+		assertEquals(7,_horaReserva.obtenerHora());
+	}
+	
 	@Test
 	public void testMinutosDeReservaDebenSer30()
 	{
-			HoraReserva horaReserva = new HoraReserva(7,30);
-			assertEquals(30,horaReserva.obtenerMinuto());
+		_horaReserva = new HoraReserva(7,30);
+		assertEquals(30,_horaReserva.obtenerMinuto());
 	}
-
+	
+	public void correrExcepcion(int hora, int minuto, String mensaje)
+	{
+		try {
+			_horaReserva = new HoraReserva(hora,minuto);
+			fail();
+		} catch (Exception e) {
+			assertEquals(mensaje,e.getMessage());
+		}
+	}
 }

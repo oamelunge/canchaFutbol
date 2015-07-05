@@ -14,73 +14,64 @@ import cancha.HoraReserva;
 import cancha.Reserva;
 
 public class TestReserva {
-
+	private HoraReserva _horaInicio;
+	private HoraReserva _horaFin;
+	private LocalDate _fechaReserva;
+	private Reserva _reserva;
+	private String _descripcion;
+	private Runnable _codigo;
 
 	@Test
 	public void testReservaDebeTenerUnaHoradeInicioyUnaHoraFin() {
-		HoraReserva horaInicio = new HoraReserva(8,30);
-		HoraReserva horaFin = new HoraReserva(9,30);
-		LocalDate fechaReserva = LocalDate.now();
-		Reserva reserva = new Reserva(fechaReserva,horaInicio, horaFin, "");
-		assertEquals(horaInicio,reserva.obtenerHoraInicio());
-		assertEquals(horaFin,reserva.obtenerHoraFin());
+		inicializarReserva(8,30,9,30);
+		assertEquals(_horaInicio,_reserva.obtenerHoraInicio());
+		assertEquals(_horaFin,_reserva.obtenerHoraFin());
 	}
-
+	
 	@Test
 	public void testHorarioDeHoraDeInicioDebeSerMenorAHorarioHoraFin() {
-		HoraReserva horaInicio = new HoraReserva(9,30);
-		HoraReserva horaFin = new HoraReserva(8,30);
-		LocalDate fechaReserva = LocalDate.now();
-		try {
-			Reserva reserva = new Reserva(fechaReserva,horaInicio, horaFin, "");
-			fail();
-		} catch (Exception e) {
-			assertEquals("Hora de inicio no puede ser mayor a hora de fin",e.getMessage());
-		}
+		
+		_codigo = ( ) -> inicializarReserva(9,30,8,30);
+		correrExcepcion(_codigo,"Hora de inicio no puede ser mayor a hora de fin");
 	}
 
 	@Test
 	public void testHorarioDeHoraDeInicioNoDebeSerIgualAHorarioHoraFin() {
-		HoraReserva horaInicio = new HoraReserva(9,30);
-		HoraReserva horaFin = new HoraReserva(9,30);
-		LocalDate fechaReserva = LocalDate.now();
-		try {
-			Reserva reserva = new Reserva(fechaReserva,horaInicio, horaFin, "");
-			fail();
-		} catch (Exception e) {
-			assertEquals("Hora de inicio no puede ser igual a hora de fin",e.getMessage());
-		}
+
+		_codigo = ( ) -> inicializarReserva(9,30,9,30);
+		correrExcepcion(_codigo,"Hora de inicio no puede ser igual a hora de fin");
 	}
 
 	@Test
 	public void testReservaDebeTenerUnaDescriptiocn() {
-		HoraReserva horaInicio = new HoraReserva(22,30);
-		HoraReserva horaFin = new HoraReserva(23,30);
-		String descripcion= "Oscar Amelunge 75520286";
-		LocalDate fechaReserva = LocalDate.now();
-		
-		Reserva reserva = new Reserva(fechaReserva,horaInicio, horaFin, descripcion);
-		
-		assertEquals(horaInicio,reserva.obtenerHoraInicio());
-		assertEquals(horaFin,reserva.obtenerHoraFin());
-		assertEquals(descripcion,reserva.obtenerDescripcion());
+	
+		inicializarReserva(22,30,23,30);
+		assertEquals(_descripcion,_reserva.obtenerDescripcion());
 		
 	}
 	
 	@Test
 	public void testReservaDebeTenerUnaFechaDeReserva()
 	{
-		HoraReserva horaInicio = new HoraReserva(22,30);
-		HoraReserva horaFin = new HoraReserva(23,30);
-		String descripcion= "Oscar Amelunge 75520286";
-		LocalDate fechaReserva = LocalDate.now();
-		
-		Reserva reserva = new Reserva(fechaReserva,horaInicio, horaFin, descripcion);
-		
-		assertEquals(horaInicio,reserva.obtenerHoraInicio());
-		assertEquals(horaFin,reserva.obtenerHoraFin());
-		assertEquals(descripcion,reserva.obtenerDescripcion());
-		assertEquals(fechaReserva,reserva.obtenerFechaReserva());
+		inicializarReserva(22,30,23,30);		
+		assertEquals(_fechaReserva,_reserva.obtenerFechaReserva());
 	}
 
+	private void inicializarReserva(int horaInicio, int minutoInicio, int horaFin, int minutoFin ) {
+		_horaInicio = new HoraReserva(horaInicio,minutoInicio);
+		_horaFin = new HoraReserva(horaFin,minutoFin);
+		_descripcion = "Oscar Amelunge 75520286";
+		_fechaReserva = LocalDate.now();
+		_reserva = new Reserva(_fechaReserva,_horaInicio, _horaFin, _descripcion);
+		
+	}
+	
+	public void correrExcepcion(Runnable codigo, String mensaje){	
+		try {	
+				codigo.run();
+				fail();
+		} catch (Exception e) {
+			assertEquals(mensaje,e.getMessage());
+		}
+	}
 }
