@@ -42,6 +42,15 @@ public class TestObjetoHora {
 		assertEquals(30,_horaReserva.obtenerMinuto());
 	}
 	
+	@Test
+	public void testUnaHoraReservaDebeSaberResponderSuHoraMilitar()
+	{
+		_horaReserva = new HoraReserva(7,30);
+		assertEquals(730,_horaReserva.horaMilitar());
+		_horaReserva = new HoraReserva(23,0);
+		assertEquals(2300,_horaReserva.horaMilitar());
+	}
+	
 	public void correrExcepcion(int hora, int minuto, String mensaje)
 	{
 		try {

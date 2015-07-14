@@ -43,4 +43,8 @@ public class HoraReserva {
 	public int obtenerMinuto() {
 		return this.minuto;
 	}
+
+	public int horaMilitar() {
+		return this.hora*100+this.minuto;
+	}
 }
