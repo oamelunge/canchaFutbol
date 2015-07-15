@@ -4,11 +4,13 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDate;
 
+import model.HoraReserva;
+import model.Reserva;
+
 import org.junit.Test;
 
-import cancha.Canchero;
-import cancha.HoraReserva;
-import cancha.Reserva;
+import canchaSystem.CancheroTransient;
+import canchaSystem.CancheroSystem;
 
 
 public class TestCanchaFutbol{
@@ -22,12 +24,12 @@ public class TestCanchaFutbol{
 	private Reserva _reserva1;
 	private Reserva _reserva2;
 	private String _descripcion;
-	private Canchero _canchero;
+	private CancheroSystem _canchero;
 
 	@Test
 	public void testCalendarioDebeAgregarUnaReserva() {
 		_reserva1=inicializarReserva(8,30,9,30);
-		_canchero = new Canchero();	
+		_canchero = new CancheroTransient(null);	
 		_canchero.agregarReserva(_reserva1);
 		assertTrue(_canchero.contains(_reserva1));
 			
@@ -38,7 +40,7 @@ public class TestCanchaFutbol{
 	{
 		_reserva1=inicializarReserva(8,30,9,30);
 		_reserva2=inicializarReserva(8,30,9,30);
-		_canchero = new Canchero();
+		_canchero = new CancheroTransient(null);
 		_canchero.agregarReserva(_reserva1);
 
 		try {
@@ -55,7 +57,7 @@ public class TestCanchaFutbol{
 	{
 		_reserva1=inicializarReserva(8,0,9,0);
 		_reserva2=inicializarReserva(8,30,9,30);
-	    _canchero = new Canchero();
+	    _canchero = new CancheroTransient(null);
 		
 		_canchero.agregarReserva(_reserva1);
 

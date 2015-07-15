@@ -1,9 +1,3 @@
-/Calendario.class
-/Canchero.class
-/TestCanchaFutbol.class
-/Reserva.class
-/HoraReserva.class
-/TestObjetoHora.class
-/TestReserva.class
+/model/
 /test/
-/cancha/
+/canchaSystem/

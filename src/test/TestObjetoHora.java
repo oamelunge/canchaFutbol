@@ -1,10 +1,9 @@
 package test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import model.HoraReserva;
 
 import org.junit.Test;
-
-import cancha.HoraReserva;
 
 public class TestObjetoHora {
 	

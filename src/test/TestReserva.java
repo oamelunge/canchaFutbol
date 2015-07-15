@@ -8,10 +8,10 @@ import static org.junit.Assert.fail;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.junit.Test;
+import model.HoraReserva;
+import model.Reserva;
 
-import cancha.HoraReserva;
-import cancha.Reserva;
+import org.junit.Test;
 
 public class TestReserva {
 	private HoraReserva _horaInicio;

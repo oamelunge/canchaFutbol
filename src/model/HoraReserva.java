@@ -1,11 +1,20 @@
-package cancha;
+package model;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+
 
 public class HoraReserva {
 
+	
 	private int hora;
 	private int minuto;
 	
 	//Principio de encapsulamiento
+	
 	public HoraReserva(int _hora, int _minuto)
 	{
 		validarHoraReserva(_hora, _minuto);

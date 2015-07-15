@@ -1,13 +1,42 @@
-package cancha;
+package model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Basic;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
+
+
+
+
+
+@Entity
+@Table( name = "RESERVA" )
 public class Reserva {
 
+
+
+
+	@Id
+	@GeneratedValue
+	protected long id;
+	@Transient
 	private HoraReserva horaInicio;
+	@Transient
 	private HoraReserva horaFin;
 	private String descripcion;
+	@Convert(converter = LocalDatePersistenceConverter.class)
 	private LocalDate fechaReserva;
+	private String horaInicioBD;
+	private String horaFinBD;
 	
 	
 
@@ -17,6 +46,8 @@ public class Reserva {
 		this.horaFin=_horaFin;
 		this.descripcion=_descripcion;
 		this.fechaReserva=_fechaReserva;
+		this.horaInicioBD=this.getHoraInicioBD();
+		this.horaFinBD=this.getHoraFinBD();
 	}
 
 
@@ -28,7 +59,22 @@ public class Reserva {
 			throw new RuntimeException("Hora de inicio no puede ser igual a hora de fin");
 	}
 
+	public long getId() {
+		return id;
+	}
 
+	
+	public String getHoraInicioBD() {
+		return Integer.toString(this.obtenerHoraInicio().obtenerHora())+":"
+			   +Integer.toString(this.obtenerHoraInicio().obtenerMinuto());
+	}
+
+
+
+	public String getHoraFinBD() {
+		return Integer.toString(this.obtenerHoraFin().obtenerHora())+":"
+	          +Integer.toString(this.obtenerHoraFin().obtenerMinuto());
+	}
 
 	public HoraReserva obtenerHoraInicio() {
 		return this.horaInicio;

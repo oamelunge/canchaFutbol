@@ -1,12 +1,22 @@
-package cancha;
+package canchaSystem;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Reserva;
 
-public class Canchero {
+
+public class CancheroTransient implements CancheroSystem {
     
 	private List<Reserva> calendario = new ArrayList<Reserva>();
 	
+	@SuppressWarnings("unused")
+	private TransientErpSystem parentSystem;
+	
+	public CancheroTransient(TransientErpSystem parentSystem)	{
+		this.parentSystem = parentSystem;
+	}
+	
+	@Override
 	public void agregarReserva(Reserva reserva) {
 		if(existeAlgunaReservaEnLaMismaFecha(reserva))
 			validarHorarioDeNuevaReserva(reserva);
@@ -33,8 +43,14 @@ public class Canchero {
 		return calendario.stream().anyMatch(r->r.obtenerHoraInicio().horaMilitar()==reserva.obtenerHoraInicio().horaMilitar());
 	}
 
+	@Override
 	public boolean contains(Reserva reserva) {
 		return calendario.contains(reserva);
+	}
+
+	@Override
+	public Reserva obtenerReserva(long id) {
+		throw new RuntimeException("Metodo No Implementado");
 	}
 
 }
