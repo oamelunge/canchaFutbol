@@ -1,4 +1,4 @@
-package canchaSystem.heroku;
+package com.example.heroku;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;

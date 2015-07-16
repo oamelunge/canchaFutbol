@@ -6,7 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 
-import canchaSystem.RestInterface.MyResource;
+import com.example.MyResource;
+
 import static org.junit.Assert.assertEquals;
 
 
